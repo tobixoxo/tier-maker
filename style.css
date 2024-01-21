@@ -1,0 +1,87 @@
+body {
+    background-color: #262626;
+    font-family: 'Exo 2', sans-serif;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.box{
+    border: black solid;
+    height: 45em;
+    width: 90vw;
+    padding: 0;
+}
+
+.tier {
+    padding-top: 0.5em;
+    display: flex;
+    justify-items: left;
+}
+
+.level {
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #ED1C24;
+    height: 8em;
+    width: 8em;
+}
+
+.item {
+    border: black solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 0.5em;
+    width: 7.5em;
+    height: 7.5em;
+    background-color:darkgray;
+}
+
+
+.item-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #7F7F7F;
+}
+
+.item-factory{
+    height: 10em;
+    width: 100%;
+    margin-top: 2em;
+
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+
+    border-radius: 1%;
+    background-color: #7F7F7F;
+    border: white dashed;
+    border-width: 2px 4px;
+    border-radius: 40px;
+}
+
+.available-items {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+img{
+    height: 7.5em;
+    width: auto;
+}
+
+#add-button:hover{
+    transform: scale(1.05);
+    transition: 0.1s;
+}
