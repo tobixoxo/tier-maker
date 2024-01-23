@@ -56,6 +56,9 @@ body {
     background-color:darkgray;
 }
 
+.itemName{
+    text-align: center;
+}
 
 .item-list {
     width: 100%;
