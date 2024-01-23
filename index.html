@@ -7,63 +7,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://fonts.googleapis.com/css2?family=Exo+2&family=Libre+Baskerville&display=swap" rel="stylesheet">
-        <title>Document</title>
+        <title>Tier List Maker</title>
 </head>
 <body>
     <h1 style="color: aliceblue; text-align: center;"> TIER LIST MAKER</h1>
     <div style="display: flex;flex-direction: column; align-items: center;">
         <div class="box">
             <div class="tier">
-                <div class="level">
+                <div id="S" class="level">
                     <div class="levelName">S</div>
                 </div>
                 <div ondrop="drop(event)" ondragover="allowDrop(event)" class="item-list">
-                    <div id="Pikachu" draggable="true" ondragstart="drag(event)" class="item">
+                    <!-- <div id="Pikachu" draggable="true" ondragstart="drag(event)" class="item">
                         <div class="levelName">Pikachu</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="tier">
-                <div class="level">
+                <div id="A" class="level">
                     <div class="levelName">A</div>
                 </div>
                 <div ondrop="drop(event)" ondragover="allowDrop(event)" class="item-list">
-                    <div id="Arceus" draggable="true" ondragstart="drag(event)" class="item">
+                    <!-- <div id="Arceus" draggable="true" ondragstart="drag(event)" class="item">
                         <div class="levelName">Arceus</div>
-                    </div>
+                    </div> -->
 
-                    <div id="Charmander" draggable="true" ondragstart="drag(event)" class="item">
+                    <!-- <div id="Charmander" draggable="true" ondragstart="drag(event)" class="item">
                         <div class="levelName">Charmander</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="tier">
-                <div class="level">
+                <div id="B" class="level">
                     <div class="levelName">B</div>
                 </div>
                 <div ondrop="drop(event)" ondragover="allowDrop(event)"  class="item-list"></div>
             </div>
             <div class="tier">
-                <div class="level">
+                <div id="C" class="level">
                     <div class="levelName">C</div>
                 </div>
                 <div ondrop="drop(event)" ondragover="allowDrop(event)" class="item-list"></div>
             </div>
             <div class="tier">
-                <div class="level">
+                <div id="D" class="level">
                     <div class="levelName">D</div>
                 </div>
                 <div ondrop="drop(event)" ondragover="allowDrop(event)" class="item-list"></div>
             </div>
         </div>
         <div class="item-factory">
-            <div ondrop="drop(event)" ondragover="allowDrop(event)" class="available-items">
-                <div id="Bulabsaur" draggable="true" ondragstart="drag(event)" class="item">
+            <div ondrop="drop(event)" ondragover="allowDrop(event)" id="available-items">
+                <!-- <div id="Bulabsaur" draggable="true" ondragstart="drag(event)" class="item">
                     <div  class="itemName">Bulabsaur</div>
                 </div>
                 <div id="Onyx" draggable="true" ondragstart="drag(event)" class="item">
                     <div class="itemName">Onyx</div>
-                </div>
+                </div> -->
+            </div>
             <div id="add-button">
                 <img  src = "addbutton.svg.svg" />
             </div>
@@ -73,6 +74,74 @@
 </body>
 
 <script>
+
+    const addButton = document.getElementById("add-button")
+    const availableItems = document.getElementById("available-items");
+
+        
+    addButton.addEventListener("click", showForm);
+
+    function showForm(){
+        if(document.getElementById("add-item-form") != null)
+            return;
+        // Create a new form element
+        const form = document.createElement('form');
+        form.id = 'add-item-form';
+        form.style.display = 'flex';
+        form.style.flexDirection = 'column';
+        form.style.justifyContent = 'center';
+        form.style.alignItems = 'center';
+
+        // Create label element
+        const label = document.createElement('label');
+        label.htmlFor = 'itemName';
+        label.textContent = 'Item Name';
+
+        // Create input element
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'itemName';
+        input.style.width = '7em';
+        input.required = true;
+
+        // Create submit button
+        const button = document.createElement('button');
+        button.type = 'submit';
+        button.textContent = 'Add';
+
+        // Append label, input, and button to the form
+        form.appendChild(label);
+        form.appendChild(input);
+        form.appendChild(button);
+
+        form.addEventListener("submit", addItem)
+
+        // Append the form to the "availableItems" container
+        availableItems.appendChild(form);
+    }
+    
+
+    function addItem(ev){
+        ev.preventDefault();
+        console.log("HELLO")
+        const itemName = document.createElement("div");
+        itemName.className = "itemName";
+        itemName.textContent = ev.target.elements['itemName'].value;
+
+        const item = document.createElement("div");
+        item.className = "item";
+        item.draggable = true;
+        item.addEventListener('dragstart', function(ev) {drag(ev)}, false);
+        // item.ondragstart = drag(event);
+        item.appendChild(itemName);
+        item.id = `${itemName.textContent}`
+
+        availableItems.appendChild(item);
+
+        const form = document.getElementById("add-item-form");
+        form.remove();
+    }
+
     function allowDrop(ev) {
       ev.preventDefault();
     }
@@ -82,9 +151,15 @@
     }
     
     function drop(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var draggedElement = document.getElementById(data);
+
+        if (draggedElement) {
+            ev.target.appendChild(draggedElement);
+        } else {
+            console.error("Element with ID '" + data + "' not found.");
+        }
     }
 </script>
 
