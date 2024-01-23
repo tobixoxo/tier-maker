@@ -27,6 +27,21 @@ body {
     height: 8em;
     width: 8em;
 }
+#S{
+    background-color: red;
+}
+#A{
+    background-color: orange;
+}
+#B{
+    background-color: yellow;
+}
+#C{
+    background-color: greenyellow;
+}
+#D{
+    background-color: skyblue;
+}
 
 .item {
     border: black solid;
@@ -68,7 +83,7 @@ body {
     border-radius: 40px;
 }
 
-.available-items {
+#available-items {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -84,4 +99,17 @@ img{
 #add-button:hover{
     transform: scale(1.05);
     transition: 0.1s;
+}
+
+#add-item-form{
+    border: black solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 0.5em;
+    width: 7.5em;
+    height: 7.5em;
+    background-color:darkgray;
 }
